@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AYB - Automate Your Business | AI Automation Agency Philippines</title>
+  <meta name="description" content="Transform your business with AI automation. AYB helps e-commerce and SME businesses automate marketing, sales, and operations using intelligent systems.">
+  <meta name="keywords" content="AI automation agency Philippines, business automation, AI systems for SMEs, marketing automation, sales automation">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React & ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Babel Standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* Design System - All colors in HSL */
+    :root {
+      --background: 230 35% 7%;
+      --foreground: 213 100% 95%;
+      --card: 230 30% 10%;
+      --card-foreground: 213 100% 95%;
+      --popover: 230 30% 12%;
+      --popover-foreground: 213 100% 95%;
+      --primary: 280 70% 60%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 190 85% 55%;
+      --secondary-foreground: 230 35% 7%;
+      --muted: 230 25% 20%;
+      --muted-foreground: 213 20% 65%;
+      --accent: 280 100% 70%;
+      --accent-foreground: 0 0% 100%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 40% 98%;
+      --border: 230 25% 20%;
+      --input: 230 25% 18%;
+      --ring: 280 70% 60%;
+      --radius: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      overflow-x: hidden;
+    }
+
+    .font-space {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, hsl(280 70% 60%), hsl(190 85% 55%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glass-card {
+      background: linear-gradient(135deg, hsl(230 30% 12% / 0.7), hsl(230 25% 15% / 0.5));
+      backdrop-filter: blur(20px);
+      border: 1px solid hsl(230 25% 20% / 0.5);
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-hero {
+      background: linear-gradient(135deg, hsl(280 70% 60%), hsl(190 85% 55%));
+      color: white;
+      box-shadow: 0 0 40px hsl(280 70% 60% / 0.3);
+    }
+
+    .btn-hero:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px hsl(280 100% 70% / 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid hsl(280 70% 60% / 0.5);
+      color: hsl(var(--foreground));
+    }
+
+    .btn-outline:hover {
+      background: hsl(280 70% 60% / 0.1);
+      border-color: hsl(280 70% 60%);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: hsl(var(--muted-foreground));
+    }
+
+    .btn-ghost:hover {
+      background: hsl(var(--primary) / 0.1);
+      color: hsl(var(--primary));
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scale-in {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% {
+        box-shadow: 0 0 20px hsl(280 70% 60% / 0.3);
+      }
+      50% {
+        box-shadow: 0 0 40px hsl(280 70% 60% / 0.6);
+      }
+    }
+
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 0.6s ease-out;
+    }
+
+    .animate-scale-in {
+      animation: scale-in 0.4s ease-out;
+    }
+
+    .animate-glow-pulse {
+      animation: glow-pulse 2s ease-in-out infinite;
+    }
+
+    .animate-gradient-shift {
+      animation: gradient-shift 6s ease infinite;
+    }
+
+    .hover-lift {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 60px hsl(280 100% 70% / 0.4);
+    }
+
+    /* Scroll Animations */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .scroll-reveal-left.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scroll-reveal-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .scroll-reveal-right.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scroll-reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .scroll-reveal-scale.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Stagger animations */
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .stagger-item.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Respect user motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-reveal,
+      .scroll-reveal-left,
+      .scroll-reveal-right,
+      .scroll-reveal-scale,
+      .stagger-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Parallax container */
+    .parallax-element {
+      will-change: transform;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Input Styles */
+    input, textarea {
+      background: hsl(var(--background) / 0.5);
+      border: 1px solid hsl(var(--border));
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      color: hsl(var(--foreground));
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: hsl(var(--primary));
+      box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: scale-in 0.3s ease-out;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Floating CTA */
+    .floating-cta {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+    }
+
+    /* Logo placeholder - replace with your actual logo URL */
+    .logo-placeholder {
+      display: inline-block;
+       height: 100px;      /* make it bigger — try 100px or more if needed */
+  width: auto;
+      padding: 1rem 2rem;
+      font-size: 2rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, hsl(280 70% 60%), hsl(190 85% 55%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: 'hsl(var(--primary))',
+            secondary: 'hsl(var(--secondary))',
+            accent: 'hsl(var(--accent))',
+            muted: 'hsl(var(--muted))',
+          },
+          fontFamily: {
+            space: ['Space Grotesk', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Icon components (simplified versions using lucide)
+    const Calendar = () => <span className="inline-block"></span>;
+    const Sparkles = () => <span className="inline-block"></span>;
+    const Brain = () => <span className="inline-block">🧠</span>;
+    const Zap = () => <span className="inline-block">⚡</span>;
+    const Target = () => <span className="inline-block">🎯</span>;
+    const MessageSquare = () => <span className="inline-block">💬</span>;
+    const Workflow = () => <span className="inline-block">🔄</span>;
+    const ShoppingCart = () => <span className="inline-block">🛒</span>;
+    const BarChart3 = () => <span className="inline-block">📊</span>;
+    const Wrench = () => <span className="inline-block">🔧</span>;
+    const Search = () => <span className="inline-block">🔍</span>;
+    const Cog = () => <span className="inline-block">⚙️</span>;
+    const Rocket = () => <span className="inline-block">🚀</span>;
+    const Heart = () => <span className="inline-block">❤️</span>;
+    const Users = () => <span className="inline-block">👥</span>;
+    const Globe = () => <span className="inline-block">🌐</span>;
+    const Quote = () => <span className="inline-block">💭</span>;
+    const Mail = () => <span className="inline-block"></span>;
+    const Facebook = () => <span className="inline-block"></span>;
+    const Linkedin = () => <span className="inline-block"></span>;
+    const Twitter = () => <span className="inline-block"></span>;
+    const CheckCircle = () => <span className="inline-block">✅</span>;
+
+   const Logo = ({ className = "" }) => (
+  <img
+    src="https://i.imgur.com/1rrT85O.png"  // ← replace with your actual logo URL
+    alt="Company Logo"
+        className={`logo-image ${className}`}
+  />
+);
+
+    // Button Component
+    const Button = ({ children, onClick, variant = "default", size = "default", className = "" }) => {
+      let btnClass = "btn ";
+      if (variant === "hero") btnClass += "btn-hero ";
+      if (variant === "outline") btnClass += "btn-outline ";
+      if (variant === "ghost") btnClass += "btn-ghost ";
+      if (size === "lg") btnClass += "text-lg px-8 py-4 ";
+      
+      return (
+        <button onClick={onClick} className={btnClass + className}>
+          {children}
+        </button>
+      );
+    };
+
+    // Hero Section
+    const Hero = ({ onBookAudit, onLearnMore }) => {
+      const heroRef = React.useRef(null);
+
+      useEffect(() => {
+        const handleScroll = () => {
+          if (!heroRef.current) return;
+          const scrolled = window.scrollY;
+          const parallaxOrbs = heroRef.current.querySelectorAll('.parallax-orb');
+
+          parallaxOrbs.forEach((orb, index) => {
+            const speed = (index + 1) * 0.3;
+            orb.style.transform = `translateY(${scrolled * speed}px)`;
+          });
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      return (
+        <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent animate-pulse" />
+          </div>
+
+          <div className="parallax-orb absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float" />
+          <div className="parallax-orb absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col items-center text-center space-y-8 animate-fade-in-up">
+            <div className="mb-4 animate-scale-in">
+              <Logo className="h-24 md:h-32 w-auto" />
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-space tracking-tight">
+              The Future of Business
+              <br />
+              <span className="text-gradient">Automation Starts Here</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl font-inter leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+              Stop losing hours to repetitive tasks. AYB transforms your everyday workflows into intelligent systems that run 24/7 —
+              automating your marketing, sales, and operations so you can focus on growth and strategy.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button variant="hero" size="lg" onClick={onBookAudit}>
+                <Calendar /> Get Your Free Automation Audit
+              </Button>
+              <Button variant="outline" size="lg" onClick={onLearnMore}>
+                <Sparkles /> See How It Works
+              </Button>
+            </div>
+            
+            <div className="pt-8 flex items-center gap-2 text-muted-foreground animate-fade-in" style={{ animationDelay: "0.3s", color: 'hsl(213 20% 65%)' }}>
+              <div className="flex -space-x-2">
+                <div className="w-10 h-10 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center">🚀</div>
+                <div className="w-10 h-10 rounded-full bg-secondary/20 border-2 border-background flex items-center justify-center">⚡</div>
+                <div className="w-10 h-10 rounded-full bg-accent/20 border-2 border-background flex items-center justify-center">✨</div>
+              </div>
+              <p className="text-sm font-inter">Trusted by forward-thinking Filipino businesses</p>
+            </div>
+          </div>
+        </div>
+
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+        </section>
+      );
+    };
+
+    // WhyChoose Section
+    const WhyChoose = () => {
+      const benefits = [
+        {
+          icon: Brain,
+          title: "Smarter Systems",
+          description: "AI-powered workflows that learn and adapt to your business needs"
+        },
+        {
+          icon: Zap,
+          title: "Faster Growth",
+          description: "Automate repetitive tasks and scale operations without adding headcount"
+        },
+        {
+          icon: Target,
+          title: "Zero Repetition",
+          description: "Eliminate manual work and focus on strategic decisions that matter"
+        }
+      ];
+
+      return (
+        <section className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background" />
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-16 scroll-reveal">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-space mb-6">
+                Smarter Systems. <span className="text-gradient">Faster Growth.</span> Zero Repetition.
+              </h2>
+              <p className="text-xl max-w-3xl mx-auto font-inter leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                AYB (Automate Your Business) creates custom AI automation systems that eliminate repetitive work,
+                increase efficiency, and supercharge your operations. We integrate your favorite tools —
+                like GoHighLevel, n8n, and Google Sheets — into a single seamless system powered by AI agents.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {benefits.map((benefit, index) => {
+                const IconComponent = benefit.icon;
+                return (
+                  <div key={benefit.title} className="glass-card p-8 rounded-2xl hover-lift group stagger-item" style={{ transitionDelay: `${index * 0.15}s` }}>
+                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-6 group-hover:animate-glow-pulse text-4xl">
+                      <IconComponent />
+                    </div>
+                    <h3 className="text-2xl font-bold font-space mb-4">{benefit.title}</h3>
+                    <p className="font-inter leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>{benefit.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Packages Section
+    const Packages = ({ onBookAudit }) => {
+      const packages = [
+        {
+          icon: Rocket,
+          name: "AYB Lite",
+          tagline: "Starter Automation",
+          description: "Perfect for businesses ready to dip their toes into automation. We'll identify and automate 1–2 high-impact workflows that save you hours every week.",
+          features: [
+            "Automate 1–2 key workflows",
+            "Basic system integration",
+            "Email & task automation",
+            "Setup & handover training"
+          ],
+          freebie: "30-min consultation with automation expert",
+          color: "from-secondary to-secondary/70",
+          popular: false
+        },
+        {
+          icon: Zap,
+          name: "AYB Core",
+          tagline: "Standard Automation",
+          description: "The sweet spot for growing businesses. Automate 3–6 multi-step workflows with seamless integrations across your marketing, sales, and operations.",
+          features: [
+            "3–6 multi-step workflows",
+            "Advanced tool integrations (CRM, email, sheets)",
+            "Custom automation sequences",
+            "Ongoing optimization support"
+          ],
+          freebie: "Pre-built workflow templates library",
+          color: "from-primary to-primary/70",
+          popular: true
+        },
+        {
+          icon: Brain,
+          name: "AYB Elite",
+          tagline: "Advanced AI System",
+          description: "Enterprise-grade AI automation. Full AI chat/voice agents, real-time dashboards, advanced analytics, and custom-built systems tailored to your unique business needs.",
+          features: [
+            "AI chat & voice agents",
+            "Custom dashboards & analytics",
+            "Unlimited workflow automation",
+            "Dedicated account manager"
+          ],
+          freebie: "1-on-1 system walkthrough + priority support",
+          color: "from-accent to-accent/70",
+          popular: false
+        }
+      ];
+
+      return (
+        <section className="py-24 relative" id="systems">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16 scroll-reveal">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-space mb-6">
+                Choose Your <span className="text-gradient">Automation Package</span>
+              </h2>
+              <p className="text-xl max-w-3xl mx-auto font-inter leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                Every package starts with a Free Automation Audit — we'll identify which workflows deliver the highest value for your business before you commit to anything.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {packages.map((pkg, index) => {
+                const IconComponent = pkg.icon;
+                return (
+                  <div key={pkg.name} className={`glass-card p-8 rounded-2xl hover-lift group relative overflow-hidden stagger-item ${pkg.popular ? 'ring-2 ring-primary' : ''}`} style={{ transitionDelay: `${index * 0.15}s` }}>
+                    {pkg.popular && (
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-primary to-accent text-white text-xs font-bold px-3 py-1 rounded-full">
+                        MOST POPULAR
+                      </div>
+                    )}
+
+                    <div className={`absolute inset-0 bg-gradient-to-br ${pkg.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+
+                    <div className="relative z-10">
+                      <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${pkg.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 text-4xl`}>
+                        <IconComponent />
+                      </div>
+
+                      <h3 className="text-3xl font-bold font-space mb-2 group-hover:text-gradient transition-all">
+                        {pkg.name}
+                      </h3>
+
+                      <p className="text-lg font-semibold mb-4" style={{ color: 'hsl(190 85% 55%)' }}>
+                        {pkg.tagline}
+                      </p>
+
+                      <p className="font-inter leading-relaxed mb-6" style={{ color: 'hsl(213 20% 65%)' }}>
+                        {pkg.description}
+                      </p>
+
+                      <div className="mb-6 space-y-3">
+                        {pkg.features.map((feature, i) => (
+                          <div key={i} className="flex items-start gap-2">
+                            <CheckCircle />
+                            <span className="font-inter text-sm" style={{ color: 'hsl(213 100% 95%)' }}>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="p-4 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 mb-6">
+                        <p className="text-sm font-semibold mb-1" style={{ color: 'hsl(280 70% 60%)' }}>🎁 FREE BONUS</p>
+                        <p className="font-inter text-sm" style={{ color: 'hsl(213 100% 95%)' }}>{pkg.freebie}</p>
+                      </div>
+
+                      <Button variant="hero" className="w-full" onClick={onBookAudit}>
+                        Book Free Audit
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-12 text-center">
+              <div className="glass-card p-8 rounded-2xl max-w-3xl mx-auto scroll-reveal-scale">
+                <h3 className="text-2xl font-bold font-space mb-4">
+                  <Search /> Not sure which package fits your business?
+                </h3>
+                <p className="font-inter mb-6 leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                  Our Free Automation Audit identifies exactly which workflows will give you the most value.
+                  We analyze your current processes and show you the highest-impact opportunities —
+                  before you invest a single peso.
+                </p>
+                <Button variant="outline" size="lg" onClick={onBookAudit}>
+                  <Calendar /> Get Your Free Audit Now
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // HowItWorks Section
+    const HowItWorks = ({ onBookAudit }) => {
+      const steps = [
+        {
+          number: "01",
+          icon: Search,
+          title: "Free Automation Audit",
+          description: "We analyze your current workflows and identify the highest-value automation opportunities. You'll see exactly what processes are costing you the most time — and which package delivers maximum ROI.",
+        },
+        {
+          number: "02",
+          icon: Cog,
+          title: "Custom System Build",
+          description: "Based on your audit results, we build tailored AI workflows that integrate seamlessly with your existing tools. No generic solutions — everything is designed specifically for your business.",
+        },
+        {
+          number: "03",
+          icon: Rocket,
+          title: "Launch & Optimize",
+          description: "We deploy your automation system and provide training so your team can hit the ground running. Plus, ongoing support ensures your workflows keep improving as your business grows.",
+        }
+      ];
+
+      return (
+        <section className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-card/50 via-background to-card/50" />
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-16 scroll-reveal">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-space mb-6">
+                From Audit to Automation in <span className="text-gradient">3 Simple Steps</span>
+              </h2>
+              <p className="text-xl max-w-3xl mx-auto font-inter leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                Every successful automation starts with understanding your unique needs. That's why we never skip the audit.
+              </p>
+            </div>
+
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-8 mb-12">
+                {steps.map((step, index) => {
+                  const IconComponent = step.icon;
+                  return (
+                    <div key={step.number} className="relative stagger-item" style={{ transitionDelay: `${index * 0.2}s` }}>
+                      <div className="glass-card p-8 rounded-2xl hover-lift group">
+                        <div className="text-6xl font-bold font-space text-primary/20 mb-4 group-hover:text-primary/30 transition-colors">
+                          {step.number}
+                        </div>
+
+                        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-6 group-hover:animate-glow-pulse text-4xl">
+                          <IconComponent />
+                        </div>
+
+                        <h3 className="text-2xl font-bold font-space mb-4">{step.title}</h3>
+                        <p className="font-inter leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="text-center">
+                <div className="glass-card p-8 rounded-2xl max-w-2xl mx-auto scroll-reveal-scale">
+                  <h3 className="text-2xl font-bold font-space mb-4">
+                    🎯 Why Start with an Audit?
+                  </h3>
+                  <p className="font-inter mb-6 leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                    Because we find the highest-value workflows for your business before you commit.
+                    The audit ensures you get the right package and the right automations — saving you time and money from day one.
+                  </p>
+                  <Button variant="hero" size="lg" onClick={onBookAudit}>
+                    <Calendar /> Book Your Free Audit Today
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // ROI Calculator Section
+    const ROICalculator = () => {
+      const [hoursPerWeek, setHoursPerWeek] = useState(15);
+      const [staffTier, setStaffTier] = useState('mid');
+      const [selectedPackage, setSelectedPackage] = useState('core');
+      const [calculatedSavings, setCalculatedSavings] = useState({
+        timeRecovered: 0,
+        monthly: 0,
+        yearly: 0,
+        efficiency: 0
+      });
+
+      const staffTiers = {
+        va: { label: 'Virtual Assistant / Admin', rate: 200, range: '₱150-250/hr' },
+        cs: { label: 'Customer Service / Junior Staff', rate: 325, range: '₱250-400/hr' },
+        mid: { label: 'Specialist / Mid-level', rate: 500, range: '₱400-600/hr' },
+        senior: { label: 'Manager / Senior Staff', rate: 800, range: '₱600-1000/hr' }
+      };
+
+      const packages = {
+        lite: { name: 'AYB Lite', efficiency: 0.30, color: 'from-secondary to-secondary/70' },
+        core: { name: 'AYB Core', efficiency: 0.50, color: 'from-primary to-primary/70' },
+        elite: { name: 'AYB Elite', efficiency: 0.75, color: 'from-accent to-accent/70' }
+      };
+
+      useEffect(() => {
+        const hourlyRate = staffTiers[staffTier].rate;
+        const efficiency = packages[selectedPackage].efficiency;
+
+        const timeRecoveredPerWeek = hoursPerWeek * efficiency;
+        const monthlySavings = timeRecoveredPerWeek * 4 * hourlyRate;
+        const yearlySavings = monthlySavings * 12;
+
+        setCalculatedSavings({
+          timeRecovered: timeRecoveredPerWeek * 52,
+          monthly: monthlySavings,
+          yearly: yearlySavings,
+          efficiency: efficiency * 100
+        });
+      }, [hoursPerWeek, staffTier, selectedPackage]);
+
+      const formatCurrency = (amount) => {
+        return new Intl.NumberFormat('en-PH', {
+          style: 'currency',
+          currency: 'PHP',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }).format(amount);
+      };
+
+      return (
+        <section className="py-24 relative overflow-hidden" id="roi-calculator">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-16 scroll-reveal">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-space mb-6">
+                Calculate Your <span className="text-gradient">Automation ROI</span>
+              </h2>
+              <p className="text-xl max-w-3xl mx-auto font-inter leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                See how much time and money you could save by automating repetitive tasks in your business
+              </p>
+            </div>
+
+            <div className="max-w-6xl mx-auto">
+              <div className="glass-card p-8 md:p-12 rounded-3xl scroll-reveal-scale">
+                <div className="grid md:grid-cols-2 gap-12">
+                  {/* Input Side */}
+                  <div className="space-y-8">
+                    <h3 className="text-2xl font-bold font-space mb-6">Your Current Situation</h3>
+
+                    {/* Question 1: Hours per week */}
+                    <div>
+                      <label className="block mb-4 font-inter">
+                        <span className="text-sm font-semibold" style={{ color: 'hsl(213 100% 95%)' }}>
+                          1. How many hours per week does your team spend on repetitive tasks?
+                        </span>
+                      </label>
+                      <input
+                        type="range"
+                        min="5"
+                        max="40"
+                        value={hoursPerWeek}
+                        onChange={(e) => setHoursPerWeek(Number(e.target.value))}
+                        className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
+                        style={{
+                          background: `linear-gradient(to right, hsl(280 70% 60%) 0%, hsl(280 70% 60%) ${((hoursPerWeek - 5) / 35) * 100}%, hsl(230 25% 20%) ${((hoursPerWeek - 5) / 35) * 100}%, hsl(230 25% 20%) 100%)`
+                        }}
+                      />
+                      <div className="flex justify-between mt-2">
+                        <span className="text-3xl font-bold font-space text-gradient">{hoursPerWeek} hours</span>
+                        <span className="text-sm" style={{ color: 'hsl(213 20% 65%)' }}>per week</span>
+                      </div>
+                    </div>
+
+                    {/* Question 2: Staff Tier */}
+                    <div>
+                      <label className="block mb-4 font-inter">
+                        <span className="text-sm font-semibold" style={{ color: 'hsl(213 100% 95%)' }}>
+                          2. What's the average hourly cost of staff doing these tasks?
+                        </span>
+                      </label>
+                      <div className="space-y-3">
+                        {Object.entries(staffTiers).map(([key, tier]) => (
+                          <div
+                            key={key}
+                            onClick={() => setStaffTier(key)}
+                            className={`p-4 rounded-xl cursor-pointer transition-all ${
+                              staffTier === key
+                                ? 'bg-gradient-to-r from-primary/20 to-accent/20 border-2 border-primary'
+                                : 'bg-muted/30 border border-muted hover:border-primary/50'
+                            }`}
+                          >
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <p className="font-semibold font-inter text-sm">{tier.label}</p>
+                                <p className="text-xs mt-1" style={{ color: 'hsl(213 20% 65%)' }}>{tier.range}</p>
+                              </div>
+                              {staffTier === key && (
+                                <div className="text-primary text-xl">✓</div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Question 3: Package Selection */}
+                    <div>
+                      <label className="block mb-4 font-inter">
+                        <span className="text-sm font-semibold" style={{ color: 'hsl(213 100% 95%)' }}>
+                          3. Select your automation package:
+                        </span>
+                      </label>
+                      <div className="space-y-3">
+                        {Object.entries(packages).map(([key, pkg]) => (
+                          <div
+                            key={key}
+                            onClick={() => setSelectedPackage(key)}
+                            className={`p-4 rounded-xl cursor-pointer transition-all ${
+                              selectedPackage === key
+                                ? 'bg-gradient-to-r from-primary/20 to-accent/20 border-2 border-primary'
+                                : 'bg-muted/30 border border-muted hover:border-primary/50'
+                            }`}
+                          >
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <p className="font-bold font-space">{pkg.name}</p>
+                                <p className="text-xs mt-1" style={{ color: 'hsl(213 20% 65%)' }}>
+                                  Saves {pkg.efficiency * 100}% of those hours
+                                </p>
+                              </div>
+                              {selectedPackage === key && (
+                                <div className="text-primary text-xl">✓</div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Results Side */}
+                  <div className="space-y-6">
+                    <h3 className="text-2xl font-bold font-space mb-6">Your Potential Savings with {packages[selectedPackage].name}</h3>
+
+                    <div className="bg-gradient-to-br from-accent/10 to-primary/10 p-6 rounded-2xl border border-accent/20">
+                      <div className="text-sm font-semibold mb-2" style={{ color: 'hsl(280 100% 70%)' }}>
+                        ⚡ Efficiency Gain
+                      </div>
+                      <div className="text-5xl font-bold font-space text-gradient">
+                        {calculatedSavings.efficiency}%
+                      </div>
+                      <p className="text-sm mt-2" style={{ color: 'hsl(213 20% 65%)' }}>
+                        Of repetitive tasks automated
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-primary/10 to-accent/10 p-6 rounded-2xl border border-primary/20">
+                      <div className="text-sm font-semibold mb-2" style={{ color: 'hsl(280 70% 60%)' }}>
+                        ⏰ Time Recovered
+                      </div>
+                      <div className="text-4xl font-bold font-space text-gradient">
+                        {Math.round(calculatedSavings.timeRecovered)} hours
+                      </div>
+                      <p className="text-sm mt-2" style={{ color: 'hsl(213 20% 65%)' }}>
+                        Per year freed up for strategic work
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-secondary/10 to-primary/10 p-6 rounded-2xl border border-secondary/20">
+                      <div className="text-sm font-semibold mb-2" style={{ color: 'hsl(190 85% 55%)' }}>
+                        💰 Monthly Savings
+                      </div>
+                      <div className="text-4xl font-bold font-space text-gradient">
+                        {formatCurrency(calculatedSavings.monthly)}
+                      </div>
+                      <p className="text-sm mt-2" style={{ color: 'hsl(213 20% 65%)' }}>
+                        Cost savings per month
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-primary/10 to-secondary/10 p-6 rounded-2xl border border-primary/20">
+                      <div className="text-sm font-semibold mb-2" style={{ color: 'hsl(280 70% 60%)' }}>
+                        📈 Annual Impact
+                      </div>
+                      <div className="text-4xl font-bold font-space text-gradient">
+                        {formatCurrency(calculatedSavings.yearly)}
+                      </div>
+                      <p className="text-sm mt-2" style={{ color: 'hsl(213 20% 65%)' }}>
+                        Total annual savings
+                      </p>
+                    </div>
+
+                    <div className="pt-4">
+                      <Button variant="hero" className="w-full" onClick={() => document.querySelector('[data-booking-trigger]')?.click()}>
+                        <Calendar /> Book Free Audit & Start Saving
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-8 border-t" style={{ borderColor: 'hsl(230 25% 20% / 0.5)' }}>
+                  <div className="grid md:grid-cols-3 gap-6 mb-6">
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">💡</div>
+                      <p className="text-xs font-inter" style={{ color: 'hsl(213 20% 65%)' }}>
+                        <strong>Conservative Estimates</strong><br/>
+                        Based on real client outcomes
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">📊</div>
+                      <p className="text-xs font-inter" style={{ color: 'hsl(213 20% 65%)' }}>
+                        <strong>Your Actual Results</strong><br/>
+                        May vary based on workflow complexity
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">🎯</div>
+                      <p className="text-xs font-inter" style={{ color: 'hsl(213 20% 65%)' }}>
+                        <strong>Free Audit Included</strong><br/>
+                        We'll verify these numbers together
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-center font-inter text-sm leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                    <strong>Why These Numbers Matter:</strong> Every hour your team spends on repetitive tasks is time they can't spend on growth, innovation, or customer relationships. Our Free Automation Audit identifies your exact workflows and validates these projections before you invest.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // About Section
+    const About = () => (
+      <section className="py-24 relative">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12 scroll-reveal">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-space mb-6">
+                Our Vision: <span className="text-gradient">AI for Every Business</span>
+              </h2>
+            </div>
+
+            <div className="glass-card p-12 rounded-3xl space-y-8 scroll-reveal-scale">
+              <p className="text-xl font-inter leading-relaxed" style={{ color: 'hsl(213 100% 95%)' }}>
+                AYB is built by innovators passionate about making AI accessible to Filipino entrepreneurs.
+              </p>
+              
+              <p className="text-xl font-inter leading-relaxed" style={{ color: 'hsl(213 100% 95%)' }}>
+                We believe AI isn't here to replace people — <span className="text-gradient font-semibold">it's here to elevate them</span>.
+              </p>
+              
+              <p className="text-xl font-inter leading-relaxed" style={{ color: 'hsl(213 100% 95%)' }}>
+                Our goal is to make the Philippines a center of AI-powered business transformation.
+              </p>
+
+              <div className="grid md:grid-cols-3 gap-6 pt-8">
+                <div className="text-center p-6 rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors">
+                  <div className="text-4xl mb-4"><Heart /></div>
+                  <p className="font-semibold font-space">Passion-Driven</p>
+                </div>
+                <div className="text-center p-6 rounded-xl bg-accent/5 hover:bg-accent/10 transition-colors">
+                  <div className="text-4xl mb-4"><Users /></div>
+                  <p className="font-semibold font-space">People-First</p>
+                </div>
+                <div className="text-center p-6 rounded-xl bg-secondary/5 hover:bg-secondary/10 transition-colors">
+                  <div className="text-4xl mb-4"><Globe /></div>
+                  <p className="font-semibold font-space">Future-Focused</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+
+    // CallToAction Section
+    const CallToAction = ({ onBookAudit }) => (
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 animate-gradient-shift bg-[length:200%_auto]" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/30 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center scroll-reveal">
+            <div className="glass-card p-12 md:p-16 rounded-3xl">
+              <div className="mb-8 text-6xl">
+                <Sparkles />
+              </div>
+
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-space mb-6">
+                Ready to Reclaim Your Time and <span className="text-gradient">Scale Faster?</span>
+              </h2>
+
+              <p className="text-xl md:text-2xl mb-10 font-inter leading-relaxed" style={{ color: 'hsl(213 20% 65%)' }}>
+                Book your Free Automation Audit today and discover which AYB package gives you the most value.
+                We'll show you exactly what workflows to automate for maximum efficiency and growth.
+              </p>
+
+              <Button variant="hero" size="lg" onClick={onBookAudit} className="animate-glow-pulse">
+                <Calendar /> Book Your Free Audit Now
+              </Button>
+
+              <p className="text-sm mt-6 font-inter" style={{ color: 'hsl(213 20% 65%)' }}>
+                No commitment required • 30-minute deep-dive session • Expert consultation included
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // Footer Section
+    const Footer = () => (
+      <footer className="relative py-20 border-t" style={{ borderColor: 'hsl(230 25% 20% / 0.5)' }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-card/50" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div className="lg:col-span-2">
+              <Logo className="h-16 w-auto mb-4" />
+              <p className="font-inter mb-6 max-w-md" style={{ color: 'hsl(213 20% 65%)' }}>
+                We handle the heavy lifting while you focus on scaling. Transform your business with AI automation.
+              </p>
+              <div className="flex gap-4">
+                <Button variant="ghost" className="p-2"><Facebook /></Button>
+                <Button variant="ghost" className="p-2"><Linkedin /></Button>
+                <Button variant="ghost" className="p-2"><Twitter /></Button>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-bold font-space text-lg mb-4">Quick Links</h3>
+              <ul className="space-y-3 font-inter">
+                <li><a href="#systems" className="hover:text-primary transition-colors" style={{ color: 'hsl(213 20% 65%)' }}>Our Systems</a></li>
+                <li><a href="#about" className="hover:text-primary transition-colors" style={{ color: 'hsl(213 20% 65%)' }}>About Us</a></li>
+                <li><a href="#contact" className="hover:text-primary transition-colors" style={{ color: 'hsl(213 20% 65%)' }}>Contact</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-bold font-space text-lg mb-4">Get in Touch</h3>
+              <div className="space-y-3">
+                <a href="mailto:aybaiconsulting@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors font-inter" style={{ color: 'hsl(213 20% 65%)' }}>
+                  <Mail /> aybaiconsulting@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-2xl mx-auto mb-12">
+            <div className="glass-card p-8 rounded-2xl">
+              <h3 className="font-bold font-space text-2xl mb-6 text-center">
+                Send us a <span className="text-gradient">Message</span>
+              </h3>
+              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Message sent! (Demo)'); }}>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <input type="text" placeholder="Your Name" required />
+                  <input type="email" placeholder="Your Email" required />
+                </div>
+                <input type="text" placeholder="Subject" required />
+                <textarea placeholder="Your Message" rows="4" required></textarea>
+                <Button variant="hero" className="w-full">
+                  Send Message
+                </Button>
+              </form>
+            </div>
+          </div>
+
+          <div className="border-t pt-8" style={{ borderColor: 'hsl(230 25% 20% / 0.5)' }}>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm font-inter" style={{ color: 'hsl(213 20% 65%)' }}>
+              <p>© 2025 AYB - Automate Your Business. All rights reserved.</p>
+              <div className="flex gap-6">
+                <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+                <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+
+    // Booking Modal
+    const BookingModal = ({ isOpen, onClose }) => {
+      const [submitted, setSubmitted] = useState(false);
+      const [formData, setFormData] = useState({
+        name: "",
+        business: "",
+        email: "",
+        website: ""
+      });
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmitted(true);
+        alert('Booking request received! (Demo mode)');
+      };
+
+      const handleClose = () => {
+        setSubmitted(false);
+        setFormData({ name: "", business: "", email: "", website: "" });
+        onClose();
+      };
+
+      if (!isOpen) return null;
+
+      return (
+        <div className="modal-overlay" onClick={handleClose}>
+          <div className="modal-content glass-card p-8 rounded-2xl" onClick={(e) => e.stopPropagation()}>
+            {!submitted ? (
+              <>
+                <div className="flex items-center gap-2 mb-6">
+                  <Calendar />
+                  <h2 className="text-2xl font-space font-bold">Book Your Free Automation Audit</h2>
+                </div>
+
+                <p className="font-inter mb-6" style={{ color: 'hsl(213 20% 65%)' }}>
+                  We'll analyze your workflows and show you exactly which automations deliver the highest value for your business.
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block mb-2 font-inter text-sm">Full Name</label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Juan Dela Cruz"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block mb-2 font-inter text-sm">Business Name</label>
+                    <input
+                      type="text"
+                      value={formData.business}
+                      onChange={(e) => setFormData({ ...formData, business: e.target.value })}
+                      placeholder="Your Company Name"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block mb-2 font-inter text-sm">Email Address</label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="you@company.com"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block mb-2 font-inter text-sm">Website (Optional)</label>
+                    <input
+                      type="url"
+                      value={formData.website}
+                      onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                      placeholder="https://yourwebsite.com"
+                    />
+                  </div>
+
+                  <Button type="submit" variant="hero" className="w-full mt-6">
+                    Claim My Free Audit
+                  </Button>
+                </form>
+              </>
+            ) : (
+              <div className="text-center py-8">
+                <div className="text-6xl mb-6 animate-scale-in"><CheckCircle /></div>
+                <h3 className="text-2xl font-bold font-space mb-4">
+                  You're All Set!
+                </h3>
+                <p className="font-inter mb-6" style={{ color: 'hsl(213 20% 65%)' }}>
+                  Thank you for booking your Free Automation Audit! Our team will reach out within 24 hours to schedule your session and start identifying your highest-value automation opportunities.
+                </p>
+                <Button onClick={handleClose} variant="outline">
+                  Close
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    // Floating CTA
+    const FloatingCTA = ({ onClick }) => (
+      <div className="floating-cta">
+        <Button variant="hero" size="lg" onClick={onClick} className="rounded-full shadow-2xl animate-float px-6 py-6">
+          <Calendar /> Book Free Audit
+        </Button>
+      </div>
+    );
+
+    // Main App Component
+    const App = () => {
+      const [bookingOpen, setBookingOpen] = useState(false);
+
+      const handleBookAudit = () => {
+        setBookingOpen(true);
+      };
+
+      const handleLearnMore = () => {
+        document.getElementById("systems")?.scrollIntoView({ behavior: "smooth" });
+      };
+
+      // Initialize Intersection Observer for scroll animations
+      useEffect(() => {
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        };
+
+        const observerCallback = (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        // Observe all elements with scroll animation classes
+        const scrollElements = document.querySelectorAll(
+          '.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale, .stagger-item'
+        );
+
+        scrollElements.forEach((el) => observer.observe(el));
+
+        return () => {
+          scrollElements.forEach((el) => observer.unobserve(el));
+        };
+      }, []);
+
+      return (
+        <div className="min-h-screen">
+          <Hero onBookAudit={handleBookAudit} onLearnMore={handleLearnMore} />
+          <WhyChoose />
+          <Packages onBookAudit={handleBookAudit} />
+          <ROICalculator />
+          <HowItWorks onBookAudit={handleBookAudit} />
+          <About />
+          <CallToAction onBookAudit={handleBookAudit} />
+          <Footer />
+
+          <FloatingCTA onClick={handleBookAudit} data-booking-trigger />
+          <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+        </div>
+      );
+    };
+
+    // Render App
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
